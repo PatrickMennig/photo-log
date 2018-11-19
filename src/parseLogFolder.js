@@ -43,6 +43,7 @@ const jsonFile = (pathToJson) => {
 exports.jsonFile = jsonFile
 
 
+//TODO refactor: this is bad style as folder names are hard coded
 const imageFolderPathsForPart = (rootPath, partName, partIndex) => {
   return [
     path.join(rootPath, `${partIndex}_${partName}` ,`1_introSlides`),
