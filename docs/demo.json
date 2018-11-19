@@ -1,0 +1,34 @@
+{
+  "photo-log": "Created with photo-log utility",
+  
+  "workshop": {
+    "title": "Demo Innovation Workshop",
+    "subtitle": "01./02. Januar 2018, K-Town",
+    "moderators": [
+      "Max Mustermann",
+      "Maria Musterfrau"
+    ],
+    "parts": [
+      {
+        "title": "Participants",
+        "showInIndex": true
+      },
+      {
+        "title": "Motivation",
+        "showInIndex": true
+      },
+      {
+        "title": "Problemsammlung",
+        "showInIndex": true
+      },
+      {
+        "title": "Problemdetails",
+        "showInIndex": true
+      },
+      {
+        "title": "Kaffeepause",
+        "showInIndex": false
+      }
+    ]
+  }
+}

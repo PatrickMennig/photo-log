@@ -1,0 +1,19 @@
+{
+  "name": "com.de.fhg.iese.photolog",
+  "version": "0.0.1",
+  "description": "Utility to create photo logs of workshops at IESE",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "test": "mocha"
+  },
+  "author": "Patrick Mennig",
+  "license": "MIT",
+  "dependencies": {
+    "vorpal": "^1.12.0"
+  },
+  "devDependencies": {
+    "fs-extra": "^7.0.1",
+    "mocha": "^5.2.0"
+  }
+}
