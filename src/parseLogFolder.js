@@ -15,24 +15,29 @@ html representation of the photo-log.
 This html can then be used to generate a pdf file.
 */
 
-const parseLogFolder = (folderPath, logFileName, indexFileName) => {
+const parseLogFolder = (folderPath, logFileName, workshopStore = {}) => {
   folderPath = resolvePaths.sanitizeHomePath(folderPath)
 
   const photoLogJson = jsonFile(path.join(folderPath, logFileName))
-  const indexJson = jsonFile(path.join(folderPath, indexFileName))
 
-  //TODO go through all parts and get the paths to the images
-  // imageFolderPathsForPart
-  // imagePathsInDir
+  const {workshop} = photoLogJson
+  workshopStore.meta = {
+    title: workshop.title,
+    subtitle: workshop.subtitle,
+    moderators: workshop.moderators
+  }
 
-  //TODO parse the images to base64
+  const sessions = workshop.parts.map((part, i) => sessionFromPart(part, i+1, folderPath))
+  workshopStore.sessions = sessions
 
-  //TODO store the results in something reasonable
+  //TODO add index entries, we need them
+  const index = sessions.map((s) => ({
 
-  //TODO create a reasonable structure for the index file (with page numbers)
+  }))
 
-  // actual creation of pdf from this reasonable structure is done somewhere else
+  return workshopStore
 }
+exports.parseLogFolder = parseLogFolder
 
 
 const jsonFile = (pathToJson) => {
@@ -43,15 +48,41 @@ const jsonFile = (pathToJson) => {
 exports.jsonFile = jsonFile
 
 
-//TODO refactor: this is bad style as folder names are hard coded
-const imageFolderPathsForPart = (rootPath, partName, partIndex) => {
-  return [
-    path.join(rootPath, `${partIndex}_${partName}` ,`1_introSlides`),
-    path.join(rootPath, `${partIndex}_${partName}` ,`2_results`),
-    path.join(rootPath, `${partIndex}_${partName}` ,`3_impressions`)
-  ]
+const sessionFromPart = (part, i, folderPath) => {
+  const session = {
+    title: part.title,
+    showInIndex: part.showInIndex,
+    index: i,
+    imagePaths: {
+      introSlides: [],
+      results: [],
+      impressions: []
+    },
+    numberOfSlides: null
+  }
+
+  const imgDirPaths = imageDirPathsForPart(folderPath, session.title, session.index)
+  session.imagePaths.introSlides = imagePathsInDir(path.join(imgDirPaths.introSlides))
+  session.imagePaths.results = imagePathsInDir(path.join(imgDirPaths.results))
+  session.imagePaths.impressions = imagePathsInDir(path.join(imgDirPaths.impressions))
+
+  session.numberOfSlides =
+    session.imagePaths.introSlides.length +
+    session.imagePaths.results.length +
+    session.imagePaths.impressions.length
+
+  return session
 }
-exports.imageFolderPathsForPart = imageFolderPathsForPart
+exports.sessionFromPart = sessionFromPart
+
+
+//TODO refactor: this is bad style as folder names are hard coded
+const imageDirPathsForPart = (rootPath, partTitle, partIndex) => ({
+  introSlides: path.join(rootPath, `${partIndex}_${partTitle}` ,`1_introSlides`),
+  results: path.join(rootPath, `${partIndex}_${partTitle}` ,`2_results`),
+  impressions: path.join(rootPath, `${partIndex}_${partTitle}` ,`3_impressions`)
+})
+exports.imageDirPathsForPart = imageDirPathsForPart
 
 
 const imagePathsInDir = (dirPath, extensions = ['.png', '.PNG', '.jpg', '.jpeg', '.JPG']) => {
@@ -59,19 +90,11 @@ const imagePathsInDir = (dirPath, extensions = ['.png', '.PNG', '.jpg', '.jpeg',
     if(! endsWith(filename, extensions)) {
       return null
     }
-    return filename
+    return path.join(dirPath, filename)
   })
-  return images
+  return images.filter((e) => e !== null)
 }
 exports.imagePathsInDir = imagePathsInDir
-
-
-const toBase64 = (imagePath) => {
-  const image = fs.readFileSync(imagePath)
-  const base64 = new Buffer(image).toString('base64')
-  return base64
-}
-exports.toBase64 = toBase64
 
 
 const endsWith = (filename, extensions) => extensions.filter((ext) => filename.endsWith(ext)).length > 0

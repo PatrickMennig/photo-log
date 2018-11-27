@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>{{meta.title}}</title>
+</head>
+
+<body>
+  <div class="page">
+    <p>{{meta.title}}</p>
+    <p>{{meta.subtitle}}</p>
+    {{#each meta.moderators}}
+    <p>{{this}}</p>
+    {{/each}}
+  </div>
+</body>
+
+</html>

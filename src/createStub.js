@@ -3,7 +3,7 @@ const path = require('path')
 const resolvePaths = require('./resolvePaths.js')
 
 const jsonStub = {
-  "photo-log": 'Created with photo-log utility',
+  "photo-log": 'Created with photo-log utility. Do not change this files name!',
   "workshop": {
     "title": "Demo Innovation Workshop",
     "subtitle": "01./02. Januar 2018, K-Town",
@@ -12,6 +12,10 @@ const jsonStub = {
       "Maria Musterfrau"
     ],
     "parts": [
+      {
+        "title": "Title",
+        "showInIndex": false
+      },
       {
         "title": "Participants",
         "showInIndex": true

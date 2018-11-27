@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>{{meta.title}}</title>
+
+<style type = "text/css">
+
+  @media print  {
+    @page {
+      size: 1920px 1080px;
+      margin: 0;
+    }
+  }
+
+  .slide {
+    page-break-before: always;
+  }
+
+  .slide-first, .slide {
+    width: 1920px;
+    height: 1080px;
+  }
+
+  img {
+    max-width:100%;
+    height:100%;
+    object-fit: cover;
+    margin: 0 auto;
+    display: block;
+  }
+
+  a {
+    display: block;
+  }
+
+</style>
+
+</head>
+
+<body>
+  <div class="slide-first">
+    <p>{{meta.title}}</p>
+    <p>{{meta.subtitle}}</p>
+    {{#each meta.moderators}}
+    <p>{{this}}</p>
+    {{/each}}
+  </div>
+
+  <!-- TODO add index -->
+  <div class="slide">
+    <h1 id="contents">Contents</h1>
+    <p> Index page </p>
+  </div>
+
+  {{#each sessions}}
+    {{#each this.imagePaths.introSlides}}
+    <div class="slide">
+      <a href="#contents"><img src="data:image/jpeg;charset=utf-8;base64, {{this}}" /></a>
+    </div>
+    {{/each}}
+
+    {{#each this.imagePaths.results}}
+    <div class="slide">
+      <a href="#contents"><img src="data:image/jpeg;charset=utf-8;base64, {{this}}" /></a>
+
+    </div>
+    {{/each}}
+
+    {{#each this.imagePaths.impressions}}
+    <div class="slide">
+      <a href="#contents"><img src="data:image/jpeg;charset=utf-8;base64, {{this}}" /></a>
+    </div>
+    {{/each}}
+  {{/each}}
+</body>
+
+</html>
