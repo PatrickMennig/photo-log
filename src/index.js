@@ -14,7 +14,7 @@ vorpal
   .command('create-stub <path>', 'Creates new photo log folder')
   .action(function(args, cb) {
     if(checks.isDir(args.path)) {
-      this.log('Error: Directory already exists at path')
+      this.log('Error: Directory already exists')
       cb()
     }
     createStub(args.path, 'photo-log.json')
