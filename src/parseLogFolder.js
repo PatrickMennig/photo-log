@@ -30,10 +30,8 @@ const parseLogFolder = (folderPath, logFileName, workshopStore = {}) => {
   const sessions = workshop.parts.map((part, i) => sessionFromPart(part, i+1, folderPath))
   workshopStore.sessions = sessions
 
-  //TODO add index entries, we need them
-  const index = sessions.map((s) => ({
-
-  }))
+  const index = indexFromSessions(sessions)
+  workshopStore.index = index
 
   return workshopStore
 }
@@ -46,6 +44,28 @@ const jsonFile = (pathToJson) => {
   return json
 }
 exports.jsonFile = jsonFile
+
+
+const indexFromSessions = (sessions) => {
+  let lastPartEnd = 1
+
+  const index =
+    sessions.map((s) => ({
+      showInIndex: s.showInIndex,
+      title: s.title,
+      numberOfSlides: s.numberOfSlides
+    }))
+    .map((s, i, index) => {
+      const altered =  Object.assign({
+        begin: lastPartEnd
+      }, s)
+      lastPartEnd += s.numberOfSlides
+      return altered
+    })
+    .filter((s) => s.showInIndex)
+
+  return index
+}
 
 
 const sessionFromPart = (part, i, folderPath) => {

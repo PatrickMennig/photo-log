@@ -10,6 +10,10 @@
     ],
     "parts": [
       {
+        "title": "TitleSlides",
+        "showInIndex": false
+      },
+      {
         "title": "Participants",
         "showInIndex": true
       },

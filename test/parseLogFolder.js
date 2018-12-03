@@ -62,15 +62,15 @@ describe('parseLogFolder', function() {
         title: 'Motivation',
         showInIndex: true
       }
-      const sessionIndex = 2
+      const sessionIndex = 3
       const expected = {
         title: 'Motivation',
         showInIndex: true,
-        index: 2,
+        index: 3,
         imagePaths: {
-          introSlides: [path.join(__dirname, 'photo-log', '2_Motivation', '1_introSlides', '01.jpg')],
-          results: [path.join(__dirname, 'photo-log', '2_Motivation', '2_results', '01.jpg')],
-          impressions: [path.join(__dirname, 'photo-log', '2_Motivation', '3_impressions', '01.jpg')]
+          introSlides: [path.join(__dirname, 'photo-log', '3_Motivation', '1_introSlides', '01.jpg')],
+          results: [path.join(__dirname, 'photo-log', '3_Motivation', '2_results', '01.jpg')],
+          impressions: [path.join(__dirname, 'photo-log', '3_Motivation', '3_impressions', '01.jpg')]
         },
         numberOfSlides: 3
       }
@@ -90,26 +90,51 @@ describe('parseLogFolder', function() {
           subtitle: 'Test Subtitle',
           moderators: ['Max Mustermann', 'Maria Musterfrau']
         },
-        sessions: [
+        index: [
           {
             title: 'Participants',
             showInIndex: true,
+            begin: 2,
+            numberOfSlides: 2
+          },
+          {
+            title: 'Motivation',
+            showInIndex: true,
+            begin: 4,
+            numberOfSlides: 3
+          }
+        ],
+        sessions: [
+          {
+            title: 'TitleSlides',
+            showInIndex: false,
             index: 1,
             imagePaths: {
-              introSlides: [path.resolve(__dirname, 'photo-log', '1_Participants', '1_introSlides', '01.jpg')],
+              introSlides: [path.resolve(__dirname, 'photo-log', '1_TitleSlides', '1_introSlides', '01.jpg')],
               results: [],
-              impressions: [path.resolve(__dirname, 'photo-log', '1_Participants', '3_impressions', '01.jpg')]
+              impressions: []
+            },
+            numberOfSlides: 1
+          },
+          {
+            title: 'Participants',
+            showInIndex: true,
+            index: 2,
+            imagePaths: {
+              introSlides: [path.resolve(__dirname, 'photo-log', '2_Participants', '1_introSlides', '01.jpg')],
+              results: [],
+              impressions: [path.resolve(__dirname, 'photo-log', '2_Participants', '3_impressions', 'IMG_2819.JPG')]
             },
             numberOfSlides: 2
           },
           {
             title: 'Motivation',
             showInIndex: true,
-            index: 2,
+            index: 3,
             imagePaths: {
-              introSlides: [path.resolve(__dirname, 'photo-log', '2_Motivation', '1_introSlides', '01.jpg')],
-              results: [path.resolve(__dirname, 'photo-log', '2_Motivation', '2_results', '01.jpg')],
-              impressions: [path.resolve(__dirname, 'photo-log', '2_Motivation', '3_impressions', '01.jpg')]
+              introSlides: [path.resolve(__dirname, 'photo-log', '3_Motivation', '1_introSlides', '01.jpg')],
+              results: [path.resolve(__dirname, 'photo-log', '3_Motivation', '2_results', '01.jpg')],
+              impressions: [path.resolve(__dirname, 'photo-log', '3_Motivation', '3_impressions', '01.jpg')]
             },
             numberOfSlides: 3
           }
