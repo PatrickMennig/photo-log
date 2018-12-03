@@ -32,7 +32,7 @@ describe('createHtml', function() {
         </body>
         </html>
       `
-      const result = createHtml.compileTest(data, path.resolve(__dirname, 'template.html'))
+      const result = createHtml.createHtml(data, path.resolve(__dirname, 'template.html'))
       assert.equal(result.replace(/\s+/g, '') , expected.replace(/\s+/g, '') )
     })
 
