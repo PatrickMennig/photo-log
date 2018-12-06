@@ -72,7 +72,8 @@ describe('parseLogFolder', function() {
           results: [path.join(__dirname, 'photo-log', '3_Motivation', '2_results', '01.jpg')],
           impressions: [path.join(__dirname, 'photo-log', '3_Motivation', '3_impressions', '01.jpg')]
         },
-        numberOfSlides: 3
+        numberOfSlides: 3,
+        numberOfSlidesOnlyResults: 2
       }
       const result = parseLogFolder.sessionFromPart(part, sessionIndex, testFolderPath)
       assert.deepEqual(result, expected)
@@ -95,13 +96,17 @@ describe('parseLogFolder', function() {
             title: 'Participants',
             showInIndex: true,
             begin: 2,
-            numberOfSlides: 2
+            beginOnlyResults: 2,
+            numberOfSlides: 2,
+            numberOfSlidesOnlyResults: 1
           },
           {
             title: 'Motivation',
             showInIndex: true,
             begin: 4,
-            numberOfSlides: 3
+            beginOnlyResults: 3,
+            numberOfSlides: 3,
+            numberOfSlidesOnlyResults: 2
           }
         ],
         sessions: [
@@ -114,7 +119,8 @@ describe('parseLogFolder', function() {
               results: [],
               impressions: []
             },
-            numberOfSlides: 1
+            numberOfSlides: 1,
+            numberOfSlidesOnlyResults: 1
           },
           {
             title: 'Participants',
@@ -125,7 +131,8 @@ describe('parseLogFolder', function() {
               results: [],
               impressions: [path.resolve(__dirname, 'photo-log', '2_Participants', '3_impressions', 'IMG_2819.JPG')]
             },
-            numberOfSlides: 2
+            numberOfSlides: 2,
+            numberOfSlidesOnlyResults: 1
           },
           {
             title: 'Motivation',
@@ -136,7 +143,8 @@ describe('parseLogFolder', function() {
               results: [path.resolve(__dirname, 'photo-log', '3_Motivation', '2_results', '01.jpg')],
               impressions: [path.resolve(__dirname, 'photo-log', '3_Motivation', '3_impressions', '01.jpg')]
             },
-            numberOfSlides: 3
+            numberOfSlides: 3,
+            numberOfSlidesOnlyResults: 2
           }
         ]
       }

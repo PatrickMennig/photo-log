@@ -13,6 +13,11 @@
     }
   }
 
+  body {
+    margin: 0;
+    padding: 0;
+  }
+
   .slide {
     page-break-before: always;
   }
@@ -20,6 +25,11 @@
   .slide-first, .slide {
     width: 1920px;
     height: 1080px;
+  }
+
+  .index {
+    background-color: green;
+    color: white;
   }
 
   img {
@@ -39,21 +49,35 @@
 </head>
 
 <body>
-  <div class="slide-first">
-    <p>{{meta.title}}</p>
-    <p>{{meta.subtitle}}</p>
-    {{#each meta.moderators}}
-    <p>{{this}}</p>
+
+  {{#each sessions}}
+    {{#if @first}}
+      {{#each this.imagePaths.introSlides}}
+        {{#if @first}}
+          <div class="slide-first">
+            <a href="#contents"><img src="data:image/jpeg;charset=utf-8;base64, {{this}}" /></a>
+          </div>
+        {{else}}
+          <div class="slide">
+            <a href="#contents"><img src="data:image/jpeg;charset=utf-8;base64, {{this}}" /></a>
+          </div>
+        {{/if}}
+      {{/each}}
+    {{/if}}
+    </div>
+  {{/each}}
+
+  <!-- TODO add index -->
+  <div class="slide index">
+    <h1 id="contents">Contents</h1>
+    {{#each index}}
+      <p> {{this.title}} </p>
     {{/each}}
   </div>
 
-  <!-- TODO add index -->
-  <div class="slide">
-    <h1 id="contents">Contents</h1>
-    <p> Index page </p>
-  </div>
-
   {{#each sessions}}
+    {{#if @first}}
+    {{else}}
     {{#each this.imagePaths.introSlides}}
     <div class="slide">
       <a href="#contents"><img src="data:image/jpeg;charset=utf-8;base64, {{this}}" /></a>
@@ -72,6 +96,7 @@
       <a href="#contents"><img src="data:image/jpeg;charset=utf-8;base64, {{this}}" /></a>
     </div>
     {{/each}}
+    {{/if}}
   {{/each}}
 </body>
 

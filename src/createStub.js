@@ -13,11 +13,11 @@ const jsonStub = {
     ],
     "parts": [
       {
-        "title": "Title",
+        "title": "Titelfolien",
         "showInIndex": false
       },
       {
-        "title": "Participants",
+        "title": "Teilnehmer",
         "showInIndex": true
       },
       {

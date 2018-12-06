@@ -48,18 +48,22 @@ exports.jsonFile = jsonFile
 
 const indexFromSessions = (sessions) => {
   let lastPartEnd = 1
+  let lastPartEndOnylResults = 1
 
   const index =
     sessions.map((s) => ({
       showInIndex: s.showInIndex,
       title: s.title,
-      numberOfSlides: s.numberOfSlides
+      numberOfSlides: s.numberOfSlides,
+      numberOfSlidesOnlyResults: s.numberOfSlidesOnlyResults
     }))
     .map((s, i, index) => {
       const altered =  Object.assign({
-        begin: lastPartEnd
+        begin: lastPartEnd,
+        beginOnlyResults: lastPartEndOnylResults
       }, s)
       lastPartEnd += s.numberOfSlides
+      lastPartEndOnylResults += s.numberOfSlidesOnlyResults
       return altered
     })
     .filter((s) => s.showInIndex)
@@ -90,6 +94,10 @@ const sessionFromPart = (part, i, folderPath) => {
     session.imagePaths.introSlides.length +
     session.imagePaths.results.length +
     session.imagePaths.impressions.length
+
+  session.numberOfSlidesOnlyResults =
+    session.imagePaths.introSlides.length +
+    session.imagePaths.results.length
 
   return session
 }

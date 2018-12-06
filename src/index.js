@@ -3,6 +3,14 @@ const vorpal = require('vorpal')()
 const checks = require('./checks.js')
 const createStub = require('./createStub.js').createStub
 const createFolders = require('./createFolders.js').createFolders
+const parseLogFolder = require('./parseLogFolder.js').parseLogFolder
+const createHtml = require('./createHtml.js').createHtml
+const createPdf = require('./createPdf.js').createPdf
+const replacePaths = require('./toBase64.js').replacePaths
+const resolvePaths = require('./resolvePaths')
+const path = require('path')
+
+const fs = require('fs')
 
 
 vorpal
@@ -46,5 +54,43 @@ vorpal
 vorpal
   .command('create-log <path>', 'Parses an existing log folder structure and outputs two pdf files')
   .action(function createLog(args, cb) {
+    if(!checks.isDir(args.path)) {
+      this.log('Error: Path is not a directory')
+      return cb()
+    }
+    if(!checks.isPhotoLog(args.path, 'photo-log.json')) {
+      this.log('Error: Path is not a photo-log directory')
+      return cb()
+    }
+    // parse the log folder
+    const workshopStore = parseLogFolder(args.path, 'photo-log.json')
 
+    // replace image paths
+    const withBase64 = replacePaths(workshopStore)
+
+    // create html
+    this.log('Workshop photo log creates your pdfs now... please be patient, this may take a while!')
+
+    const htmlWithImpressions = createHtml(withBase64, path.join(__dirname, 'template.html'), true)
+    const htmlOnlyResults = createHtml(withBase64, path.join(__dirname, 'template.html'), false)
+
+    fs.writeFileSync(resolvePaths.sanitizeHomePath(path.join(args.path, 'out.html')), htmlOnlyResults)
+
+    // create pdfs
+    const pdfWithImpressions = createPdf(htmlWithImpressions, resolvePaths.sanitizeHomePath(path.join(args.path, 'photo-log-with_impressions.pdf')), (err) => {
+      if(!err) {
+        this.log('Photo-log with impressions created')
+      }
+      this.log('Error: Could not create pdf: ' + err)
+    })
+
+    const pdfOnlyResults = createPdf(htmlOnlyResults, resolvePaths.sanitizeHomePath(path.join(args.path, 'photo-log-just_results.pdf')), (err) => {
+      if(!err) {
+        this.log('Photo-log with just results created')
+      }
+      this.log('Error: Could not create pdf' + err)
+    })
+
+    //TODO wait with ending until wkhtmltopdf has finished
+    return cb()
   })
