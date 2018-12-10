@@ -30,6 +30,11 @@
   .index {
     background-color: green;
     color: white;
+    padding: 50px 100px;
+  }
+
+  .index h1 {
+
   }
 
   img {
@@ -69,7 +74,7 @@
 
   <!-- TODO add index -->
   <div class="slide index">
-    <h1 id="contents">Contents</h1>
+    <h1 id="contents">{{meta.indexTitle}}</h1>
     {{#each index}}
       <p> {{this.title}} </p>
     {{/each}}

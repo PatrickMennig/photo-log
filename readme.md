@@ -56,6 +56,7 @@ You will need
 ## Open Issues
 
 - Currently only works with jpeg images
+- Workshop meta info is not used yet
 - Status info while building the pdfs is not shown
 - PDFs look a bit ugly
 - Index not yet implemented

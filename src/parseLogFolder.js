@@ -24,7 +24,8 @@ const parseLogFolder = (folderPath, logFileName, workshopStore = {}) => {
   workshopStore.meta = {
     title: workshop.title,
     subtitle: workshop.subtitle,
-    moderators: workshop.moderators
+    moderators: workshop.moderators,
+    indexTitle: workshop.indexTitle
   }
 
   const sessions = workshop.parts.map((part, i) => sessionFromPart(part, i+1, folderPath))
