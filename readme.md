@@ -23,24 +23,22 @@ After the workshop use a photo management software, e.g. "Photos" on a Mac
 to arrange the pictures taken in the right order. Export them as jpeg images.
 Filenames need to be alphanumerically ordered by the desired order.
 
-If you have explanatory slides, e.g. in PowerPoint or Keynote, export them as
-jpeg images too. Filenames need to be alphanumerically ordered by the desired order.
+Explanatory slides, e.g. in PowerPoint or Keynote, have to be exported as jpeg images too. Filenames need to be alphanumerically ordered by the desired order. Each workshop part shoul be introduced by at least one introductory slide.
 
 Now start the photo-log command line utility and run ```create-stub <path>``` to
 create a new photo-log directory on your machine at the given path. You can use the tilde operator ```~``` to shortcut your home directory (e.g. ```~/Desktop/myworkshop```).
 
 A json file will be present at the top level of the folder. Fill out the details of
-your workshop and add the parts/sessions to the respective entry in the json file.
+your workshop and add the parts/sessions to the respective entry in the json file. The order of the parts has to be correct.
 
 Then run ```create-folders <path>```. This will create a directory for each workshop
-session in the json file with three subdirectories: introSlides, results and impressions.
+session in the json file with three subdirectories: *introSlides*, *results* and *impressions*.
 
-Add the explanatory slides images to the introSlides directory.
-Add the results images to the results directory and the impressions to the impressions directory.
+Add the explanatory slides images to the *introSlides* directory.
+Add the results images to the *results* directory and the *impressions* to the impressions directory.
 
 Then run ```create-log <path>``` and wait some time. The command line utility will
-create two pdf files, one containing all images and one that contains all but the
-impression images.
+create two pdf files, one containing all images and one that contains all but the impression images.
 
 **Be happy that you just saved two hours of your life!**
 
