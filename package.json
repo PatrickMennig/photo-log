@@ -1,5 +1,5 @@
 {
-  "name": "com.de.fhg.iese.photolog",
+  "name": "com.de.pm.photolog",
   "version": "1.0.1",
   "description": "Utility to create photo logs of workshops at IESE",
   "main": "src/index.js",
