@@ -2,3 +2,7 @@
 
 node_modules
 out.pdf
+
+*.JPG
+*.jpg
+*.PNG
