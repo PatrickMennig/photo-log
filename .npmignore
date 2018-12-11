@@ -1,0 +1,10 @@
+test/images/*
+test/photo-log/1_TitleSlides/1_introSlides/*
+test/photo-log/1_TitleSlides/2_results/*
+test/photo-log/1_TitleSlides/3_impressions/*
+test/photo-log/2_Participants/1_introSlides/*
+test/photo-log/2_Participants/2_results/*
+test/photo-log/2_Participants/3_impressions/*
+test/photo-log/3_Motivation/1_introSlides/*
+test/photo-log/3_Motivation/2_results/*
+test/photo-log/3_Motivation/3_impressions/*
