@@ -21,6 +21,9 @@ clicking on an image, the viewer is taken back to the index page.
 
 After the workshop use a photo management software, e.g. "Photos" on a Mac
 to arrange the pictures taken in the right order. Export them as jpeg images.
+It is recommended to resize the images to a maximum width of 1920px and use
+a reasonable quality setting (e.g. medium, quality 5, etc.) to limit the
+size of individual files.
 Filenames need to be alphanumerically ordered by the desired order.
 
 Explanatory slides, e.g. in PowerPoint or Keynote, have to be exported as jpeg images too. Filenames need to be alphanumerically ordered by the desired order. Each workshop part shoul be introduced by at least one introductory slide.
@@ -47,10 +50,21 @@ create two pdf files, one containing all images and one that contains all but th
 
 You will need
 
-- npm and node.js
-- a wkhtmltopdf distribution for your system
+- npm and node.js installed on your machine
+- a wkhtmltopdf precompiled for your system (https://wkhtmltopdf.org)[https://wkhtmltopdf.org]
 - a PATH entry to wkhtml
 - photo-log installed globally (```npm i -g photo-log```)
+
+
+## Caveats
+
+This utility was built with node.js which allowed us to quickly develop this solution.
+Unfortunately, due to the nature of the V8 engine powering node.js, some hard limits
+exist. The maximum ram size that we can allocate is set to 8GB and the length of strings
+cannot exceed a hard maximum. The pictures have to be processed as base64 encoded strings
+so we cannot work with too large images. This should normally not be a problem, as
+you will want to limit the size of your images in the pdfs created anyway or their size
+will be extremely large. We strongly recommend that you limit the size of each individual image.
 
 
 ## Open Issues
@@ -58,7 +72,8 @@ You will need
 - Currently only works with jpeg images
 - Workshop meta info is not used yet
 - Status info while building the pdfs is not shown
-- PDFs look a bit ugly
-- Index not yet implemented
 - Deprecation warning from wkhtmltopdf is shown
-- Not yet tested with large amount of images
+- Not yet tested on Windows, Linux
+
+
+## Contributing

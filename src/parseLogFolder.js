@@ -48,8 +48,9 @@ exports.jsonFile = jsonFile
 
 
 const indexFromSessions = (sessions) => {
-  let lastPartEnd = 1
-  let lastPartEndOnylResults = 1
+  // index page is not counted anywhere, thats why we have to start at 2
+  let lastPartEnd = 2
+  let lastPartEndOnylResults = 2
 
   const index =
     sessions.map((s) => ({

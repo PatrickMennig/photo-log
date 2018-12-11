@@ -74,7 +74,7 @@ vorpal
     const htmlWithImpressions = createHtml(withBase64, path.join(__dirname, 'template.html'), true)
     const htmlOnlyResults = createHtml(withBase64, path.join(__dirname, 'template.html'), false)
 
-    fs.writeFileSync(resolvePaths.sanitizeHomePath(path.join(args.path, 'out.html')), htmlOnlyResults)
+    //fs.writeFileSync(resolvePaths.sanitizeHomePath(path.join(args.path, 'out.html')), htmlOnlyResults)
 
     // create pdfs
     const pdfWithImpressions = createPdf(htmlWithImpressions, resolvePaths.sanitizeHomePath(path.join(args.path, 'photo-log-with_impressions.pdf')), (err) => {

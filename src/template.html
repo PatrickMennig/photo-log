@@ -31,11 +31,43 @@
     background-color: green;
     color: white;
     padding: 50px 100px;
+    font-family: sans-serif;
+    box-sizing: border-box;
+  }
+
+  .index {
+    font-size: 24pt;
   }
 
   .index h1 {
-
+    font-size: 50pt;
   }
+
+  .indexentry {
+    margin-bottom: 16px;
+    overflow: hidden;
+  }
+
+  .indexname {
+    padding-left: 10px;
+    float: left;
+    width: 1640px;
+    overflow: hidden;
+    white-space: nowrap
+  }
+
+  .indexname::after {
+    content: " ................................................................................................................................................................................................................................................"
+  }
+
+  .indexnumber {
+    float: right;
+  }
+
+  .clearfix {
+    clear: both;
+  }
+
 
   img {
     max-width:100%;
@@ -47,6 +79,8 @@
 
   a {
     display: block;
+    text-decoration: none; /* no underline */
+    color: white;
   }
 
 </style>
@@ -74,9 +108,16 @@
 
   <!-- TODO add index -->
   <div class="slide index">
-    <h1 id="contents">{{meta.indexTitle}}</h1>
+    <h1 name="contents" id="contents">{{meta.indexTitle}}</h1>
     {{#each index}}
-      <p> {{this.title}} </p>
+      <a href="#{{this.title}}">
+      <div class="clearfix indexentry">
+
+          <div class="indexname">{{this.title}}</div>
+          <div class="indexnumber">{{this.begin}}</div>
+
+      </div>
+      </a>
     {{/each}}
   </div>
 
@@ -84,9 +125,15 @@
     {{#if @first}}
     {{else}}
     {{#each this.imagePaths.introSlides}}
-    <div class="slide">
-      <a href="#contents"><img src="data:image/jpeg;charset=utf-8;base64, {{this}}" /></a>
-    </div>
+      {{#if @first}}
+        <div class="slide first-in-part" id="{{../title}}">
+          <a href="#contents"><img src="data:image/jpeg;charset=utf-8;base64, {{this}}" /></a>
+        </div>
+      {{else}}
+        <div class="slide">
+          <a href="#contents"><img src="data:image/jpeg;charset=utf-8;base64, {{this}}" /></a>
+        </div>
+      {{/if}}
     {{/each}}
 
     {{#each this.imagePaths.results}}
@@ -103,6 +150,7 @@
     {{/each}}
     {{/if}}
   {{/each}}
+
 </body>
 
 </html>

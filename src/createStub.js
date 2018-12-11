@@ -36,6 +36,10 @@ const jsonStub = {
       {
         "title": "Kaffeepause",
         "showInIndex": false
+      },
+      {
+        "title": "Outrofolien",
+        "showInIndex": false
       }
     ]
   }
