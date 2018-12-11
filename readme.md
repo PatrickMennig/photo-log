@@ -28,7 +28,8 @@ Filenames need to be alphanumerically ordered by the desired order.
 
 Explanatory slides, e.g. in PowerPoint or Keynote, have to be exported as jpeg images too. Filenames need to be alphanumerically ordered by the desired order. Each workshop part shoul be introduced by at least one introductory slide.
 
-Now start the photo-log command line utility and run ```create-stub <path>``` to
+Navigate to the folder where you cloned the photo-log utility into.
+Now start the photo-log command line utility  and run ```create-stub <path>``` to
 create a new photo-log directory on your machine at the given path. You can use the tilde operator ```~``` to shortcut your home directory (e.g. ```~/Desktop/myworkshop```).
 
 A json file will be present at the top level of the folder. Fill out the details of
@@ -53,7 +54,7 @@ You will need
 - npm and node.js installed on your machine
 - a wkhtmltopdf precompiled for your system (https://wkhtmltopdf.org)[https://wkhtmltopdf.org]
 - a PATH entry to wkhtml
-- photo-log installed globally (```npm i -g photo-log```)
+- a clone of the photo-log repository
 
 
 ## Styling the output
@@ -80,7 +81,7 @@ will be extremely large. We strongly recommend that you limit the size of each i
 - Status info while building the pdfs is not shown
 - Deprecation warning from wkhtmltopdf is shown
 - Not yet tested on Windows, Linux
-
+- global command not working
 
 ## License
 
