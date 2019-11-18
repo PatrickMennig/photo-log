@@ -5,6 +5,7 @@
 const wkhtmltopdf = require('wkhtmltopdf')
 const fs = require('fs')
 
+
 const options = {
   pageHeight: '1080px',
   pageWidth: '1920px',
@@ -12,7 +13,11 @@ const options = {
   marginLeft: 0,
   marginTop: 0,
   marginRight: 0,
-  disableSmartShrinking: true
+//  imageDpi: 800,
+  //printMediaType: true
+  imageQuality: 100,
+//  noPdfCompression: true,
+  disableSmartShrinking: true 
 }
 
 

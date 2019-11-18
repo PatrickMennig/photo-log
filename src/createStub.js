@@ -15,7 +15,7 @@ const jsonStub = {
     "parts": [
       {
         "title": "Titelfolien",
-        "showInIndex": false
+        "showInIndex": true
       },
       {
         "title": "Teilnehmer",
@@ -35,11 +35,11 @@ const jsonStub = {
       },
       {
         "title": "Kaffeepause",
-        "showInIndex": false
+        "showInIndex": true
       },
       {
         "title": "Outrofolien",
-        "showInIndex": false
+        "showInIndex": true
       }
     ]
   }
