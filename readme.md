@@ -41,6 +41,10 @@ session in the json file with three subdirectories: *introSlides*, *results* and
 Add the explanatory slides images to the *introSlides* directory.
 Add the results images to the *results* directory and the *impressions* to the impressions directory.
 
+Then run ```select-template <file_Name>```  (e.g. select-template template.html).
+Currently available template files are template.html, template_Courgette.html and template_JollyLodger.html. Each template has different background color and font family. User can choose any font from Google Fonts (https://fonts.google.com/).  Once you select a font from the site, you can see the link and CSS rules to specify your selected font.  Please add this specification to your template file in case you want to create a new template. 
+
+
 Then run ```create-log <path>``` and wait some time. The command line utility will
 create two pdf files, one containing all images and one that contains all but the impression images.
 
