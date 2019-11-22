@@ -9,8 +9,9 @@ const createPdf = require('./createPdf.js').createPdf
 const replacePaths = require('./toBase64.js').replacePaths
 const resolvePaths = require('./resolvePaths')
 const path = require('path')
-
 const fs = require('fs')
+//to store the template from user input 
+var template;
 
 
 vorpal
@@ -49,6 +50,25 @@ vorpal
       return cb()
     }
   })
+  
+  
+  //Select your Template
+  vorpal
+  .command('select-template <template>', 'Select new template for photo log folder')
+  .action(function(args, cb){
+	  template=args.template;
+	  var search_path=path.resolve(template);
+	  fs.stat(template, function(err, search_path) {
+		  if (err) {
+		    console.log('Template does not exist');
+		  return cb()
+		  }
+		  else {                
+		    console.log('Template has been selected successfully.');
+		  return cb()
+		  }
+		});	 
+   })
 
 
 vorpal
@@ -70,9 +90,11 @@ vorpal
 
     // create html
     this.log('Workshop photo log creates your pdfs now... please be patient, this may take a while!')
-
-    const htmlWithImpressions = createHtml(withBase64, path.join(__dirname, 'template.html'), true)
-    const htmlOnlyResults = createHtml(withBase64, path.join(__dirname, 'template.html'), false)
+    
+    
+    //Passing the template variable 
+    const htmlWithImpressions = createHtml(withBase64, path.join(__dirname, template ), true)
+    const htmlOnlyResults = createHtml(withBase64, path.join(__dirname, template ), false)
 
     //fs.writeFileSync(resolvePaths.sanitizeHomePath(path.join(args.path, 'out.html')), htmlOnlyResults)
 
@@ -80,8 +102,10 @@ vorpal
     const pdfWithImpressions = createPdf(htmlWithImpressions, resolvePaths.sanitizeHomePath(path.join(args.path, 'photo-log-with_impressions.pdf')), (err) => {
       if(!err) {
         this.log('Photo-log with impressions created')
+        return cb()
       }
       this.log('Error: Could not create pdf: ' + err)
+      return cb()
     })
 
     const pdfOnlyResults = createPdf(htmlOnlyResults, resolvePaths.sanitizeHomePath(path.join(args.path, 'photo-log-just_results.pdf')), (err) => {
@@ -92,5 +116,6 @@ vorpal
     })
 
     //TODO wait with ending until wkhtmltopdf has finished
-    return cb()
+//    return cb()
+    
   })

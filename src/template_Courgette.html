@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>{{meta.title}}</title>
+
+<!-- using a google font -->
+<link href="https://fonts.googleapis.com/css?family=Courgette&display=swap" rel="stylesheet">
+
+<style type = "text/css">
+
+  @media print  {
+    @page {
+      size: 1920px 1080px;
+      margin: 0;
+    }
+  }
+
+  body {
+    margin: 0;
+    padding: 0;
+  }
+
+  .slide {
+    page-break-before: always;
+  }
+
+  .slide-first, .slide {
+    width: 1920px;
+    height: 1080px;
+  }
+
+  .index {
+    background-color: #0029A5;
+    color: white;
+    padding: 50px 100px;
+    font-family: 'Courgette', cursive;
+    box-sizing: border-box;
+  }
+
+  .index {
+    font-size: 24pt;
+  }
+
+  .index h1 {
+    font-size: 50pt;
+  }
+
+  .indexentry {
+    margin-bottom: 16px;
+    overflow: hidden;
+  }
+
+  .indexname {
+    padding-left: 10px;
+    float: left;
+    width: 1640px;
+    overflow: hidden;
+    white-space: nowrap
+  }
+
+  .indexname::after {
+    content: " ................................................................................................................................................................................................................................................"
+  }
+
+  .indexnumber {
+    float: right;
+  }
+
+  .clearfix {
+    clear: both;
+  }
+
+
+  img {
+    max-width:100%;
+    height:100%;
+    object-fit: cover;
+    margin: 0 auto;
+    display: block;
+  }
+
+  a {
+    display: block;
+    text-decoration: none; /* no underline */
+    color: white;
+  }
+
+</style>
+
+</head>
+
+<body>
+
+  {{#each sessions}}
+    {{#if @first}}
+      {{#each this.imagePaths.introSlides}}
+        {{#if @first}}
+          <div class="slide-first">
+            <a href="#contents"><img src="data:image/jpeg;charset=utf-8;base64, {{this}}" /></a>
+          </div>
+        {{else}}
+          <div class="slide">
+            <a href="#contents"><img src="data:image/jpeg;charset=utf-8;base64, {{this}}" /></a>
+          </div>
+        {{/if}}
+      {{/each}}
+    {{/if}}
+    </div>
+  {{/each}}
+
+  <!-- TODO add index -->
+  <div class="slide index">
+    <h1 name="contents" id="contents">{{meta.indexTitle}}</h1>
+    {{#each index}}
+      <a href="#{{this.title}}">
+      <div class="clearfix indexentry">
+
+          <div class="indexname">{{this.title}}</div>
+          <div class="indexnumber">{{this.begin}}</div>
+
+      </div>
+      </a>
+    {{/each}}
+  </div>
+
+  {{#each sessions}}
+    {{#if @first}}
+    {{else}}
+    {{#each this.imagePaths.introSlides}}
+      {{#if @first}}
+        <div class="slide first-in-part" id="{{../title}}">
+          <a href="#contents"><img src="data:image/jpeg;charset=utf-8;base64, {{this}}" /></a>
+        </div>
+      {{else}}
+        <div class="slide">
+          <a href="#contents"><img src="data:image/jpeg;charset=utf-8;base64, {{this}}" /></a>
+        </div>
+      {{/if}}
+    {{/each}}
+
+    {{#each this.imagePaths.results}}
+    <div class="slide">
+      <a href="#contents"><img src="data:image/jpeg;charset=utf-8;base64, {{this}}" /></a>
+
+    </div>
+    {{/each}}
+
+    {{#each this.imagePaths.impressions}}
+    <div class="slide">
+      <a href="#contents"><img src="data:image/jpeg;charset=utf-8;base64, {{this}}" /></a>
+    </div>
+    {{/each}}
+    {{/if}}
+  {{/each}}
+
+</body>
+
+</html>
